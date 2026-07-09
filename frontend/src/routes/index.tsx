@@ -3,6 +3,7 @@ import { Layout } from "../components/layout/Layout";
 import { Dashboard } from "../pages/Dashboard";
 import { Chat } from "../pages/Chat";
 import { Research } from "../pages/Research";
+import { LegalStudio } from "../pages/LegalStudio";
 import { Documents } from "../pages/Documents";
 import { Workflows } from "../pages/Workflows";
 import { KnowledgeGraph } from "../pages/KnowledgeGraph";
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Dashboard /> },
       { path: "chat", element: <Chat /> },
       { path: "research", element: <Research /> },
+      { path: "legal", element: <LegalStudio /> },
       { path: "documents", element: <Documents /> },
       { path: "workflows", element: <Workflows /> },
       { path: "graph", element: <KnowledgeGraph /> },

@@ -389,3 +389,43 @@ class ResearchNoteDB(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
     updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
 
+class LegalMatterDB(Base):
+    __tablename__ = "legal_matters"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    workspace_id = Column(String(36), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
+    name = Column(String(100), nullable=False)
+    client_name = Column(String(100), nullable=True)
+    description = Column(String(512), nullable=True)
+    status = Column(String(50), default="Active", nullable=False)
+    is_pinned = Column(Boolean, default=False, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
+
+class ContractAnalysisDB(Base):
+    __tablename__ = "contract_analyses"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    matter_id = Column(String(36), ForeignKey("legal_matters.id", ondelete="CASCADE"), nullable=False, index=True)
+    asset_id = Column(String(36), ForeignKey("knowledge_assets.id", ondelete="CASCADE"), nullable=False, index=True)
+    workspace_id = Column(String(36), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
+    executive_summary = Column(Text, nullable=False, default="")
+    clauses = Column(JSON, default=list, nullable=False)
+    risk_profile = Column(JSON, nullable=True)
+    timeline = Column(JSON, default=list, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
+
+class ComplianceReportDB(Base):
+    __tablename__ = "compliance_reports"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    matter_id = Column(String(36), ForeignKey("legal_matters.id", ondelete="CASCADE"), nullable=False, index=True)
+    asset_ids = Column(JSON, default=list, nullable=False)
+    workspace_id = Column(String(36), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
+    framework = Column(String(100), nullable=False)
+    score = Column(Float, nullable=False, default=0.0)
+    violations = Column(JSON, default=list, nullable=False)
+    missing_requirements = Column(JSON, default=list, nullable=False)
+    recommendations = Column(JSON, default=list, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)

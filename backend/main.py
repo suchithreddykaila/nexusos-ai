@@ -7,6 +7,7 @@ from app.api.v1.assistant import router as assistant_router
 from app.api.v1.workspaces import router as workspaces_router
 from app.api.v1.knowledge import router as knowledge_router
 from app.api.v1.research import router as research_router
+from app.api.v1.legal import router as legal_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -21,6 +22,7 @@ app.include_router(assistant_router, prefix=settings.API_V1_STR)
 app.include_router(workspaces_router, prefix=settings.API_V1_STR)
 app.include_router(knowledge_router, prefix=settings.API_V1_STR)
 app.include_router(research_router, prefix=settings.API_V1_STR)
+app.include_router(legal_router, prefix=settings.API_V1_STR)
 
 
 # Configure CORS for frontend access

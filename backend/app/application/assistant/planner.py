@@ -31,8 +31,18 @@ class TaskPlanner:
         # Checks if query requests multiple actions (e.g., navigation + diagnostic checks)
         has_nav = any(keyword in q for keyword in ["go to", "navigate", "open", "show", "login"])
         has_system = any(keyword in q for keyword in ["system", "health", "diagnostic", "check", "uptime"])
+        has_legal = any(keyword in q for keyword in ["analyze", "contract", "legal", "compliance", "clause", "compare", "risk", "agreement", "nda"])
         
-        if has_nav and has_system:
+        if has_legal:
+            steps.append(
+                TaskPlanStep(
+                    step_id="step_1",
+                    description="Route legal task to Legal Intelligence Studio Agent",
+                    target_agent_id="legal_agent",
+                    arguments={"query": query}
+                )
+            )
+        elif has_nav and has_system:
             # Complex multi-step instruction
             steps.append(
                 TaskPlanStep(

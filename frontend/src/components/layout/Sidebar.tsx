@@ -10,7 +10,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   Cpu,
-  BookOpen
+  BookOpen,
+  Scale
 } from "lucide-react";
 import { cn } from "../../utils/cn";
 import { WorkspaceSwitcher } from "../workspaces/WorkspaceSwitcher";
@@ -25,6 +26,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => 
 
   const menuItems = [
     { name: "Dashboard", path: "/", icon: LayoutDashboard },
+    { name: "Legal Studio", path: "/legal", icon: Scale },
     { name: "Research Studio", path: "/research", icon: BookOpen },
     { name: "AI Chat", path: "/chat", icon: Cpu },
     { name: "Documents", path: "/documents", icon: Files },

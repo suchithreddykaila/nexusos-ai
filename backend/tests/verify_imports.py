@@ -101,13 +101,21 @@ try:
     from app.application.engine.knowledge_engine import AIKnowledgeEngine
     print("[OK] AI Knowledge Engine successfully verified.")
 
-    print("Testing AI Research Studio Modules...")
+    print("Testing Research Studio Schemas & Engine Modules...")
     from app.domain.research import ResearchSession, ResearchNote
     from app.application.services.research_service import ResearchService
     from app.api.v1.research import router as research_router
-    print("[OK] AI Research Studio successfully verified.")
+    print("[OK] AI Research Studio components successfully verified.")
 
-    print("\n[SUCCESS] All evolved AI Operating System, Authentication, Workspace, Knowledge, Cognitive, Engine, and Research core imports verified successfully.")
+    print("Testing Legal Intelligence Studio Schemas & Modules...")
+    from app.domain.legal import LegalMatter, ContractAnalysis, ExtractedClause, ComplianceReport
+    from app.application.services.legal_service import LegalService
+    from app.api.v1.legal import router as legal_router
+    from app.infrastructure.tools.legal_tools import AnalyzeContractTool, CompareContractsTool
+    import app.application.assistant.agents.legal
+    print("[OK] Legal Intelligence Studio components successfully verified.")
+
+    print("\n✅ ALL BACKEND IMPORTS VERIFIED SUCCESSFULLY ✅")
 except Exception as e:
     print(f"\n[FAILURE] Evolved architecture import check failed: {e}")
     sys.exit(1)
